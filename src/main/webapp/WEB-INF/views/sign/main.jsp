@@ -1,21 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-
+<%@ include file = "../settings.jsp" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title></title>
+<meta name="viewport" content="width=device-width ,initial-scale=1">
 </head>
 <body>
-<h1>로그인 화면</h1>
-	<sec:authorize access="hasRole('ROLE_USER')">
-			유저로그인
-    </sec:authorize>   
-            
-    <sec:authorize access="hasRole('ROLE_ADMIN')">
-         	관리자로그인
-    </sec:authorize>
+<%@ include file = "../include/header.jsp" %>
+  <!--contents-->
+	<img src = "${project}temp_img/20200216_154743.png">
+  <!--contents-->
+<%@ include file = "../include/footer.jsp" %>
 </body>
 </html>
