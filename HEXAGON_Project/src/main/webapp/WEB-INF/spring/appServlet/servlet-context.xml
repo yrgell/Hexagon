@@ -28,7 +28,7 @@
 	<!-- Mybatis 설정 시작 -->
 	
 	<beans:bean name="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<beans:property name="jndiName" value="java:comp/env/jdbc/Oracle11g_hexagon"></beans:property>
+		<beans:property name="jndiName" value="java:comp/env/jdbc/Oracle11g_hexagon_tbl"></beans:property>
 		<beans:property name="resourceRef" value="true"></beans:property>
 	</beans:bean>
 	
