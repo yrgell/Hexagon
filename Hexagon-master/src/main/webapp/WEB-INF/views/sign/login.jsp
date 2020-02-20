@@ -22,8 +22,7 @@
 				</div>
 
 				<form class="login100-form validate-form" action='/hexagon/loginPro.gu'  method="post"> 
-				
-					<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}">
+				<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}">
                     <div class="limiter p-b-15  p-r-50 text-center">
                         <p class="m-b-14"> 간편 로그인 </p>
                     <button type="button" onclick="location.href='https://www.kakaocorp.com/'">
