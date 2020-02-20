@@ -83,22 +83,6 @@ public class GuestController {
 			return "sign/findPass";
 		}	
 		
-		/*상품 접속 관련*/
-		
-		@RequestMapping("/fundList.gu")
-		public String fundList() {
-			logger.info("펀드상품 목록으로 이동합니다.");
-			
-			return "/all/fundList";
-		}
-		
-		@RequestMapping("/gatheringList.gu")
-		public String gatheringList() {
-			logger.info("계모임 목록으로 이동합니다.");
-			
-			return "/all/gatheringList";
-		}
-		
 		/*게시판 접속 관련*/
 		
 		@RequestMapping("/getInterest.gu")
@@ -121,36 +105,12 @@ public class GuestController {
 			return "/all/howtoGath";
 		}
 		
-		//-------------20.2.18 현진 작업중(AJAX)-------------
-		//-------------------이벤트 게시판-------------------
-		@RequestMapping("/event.gu") 
+		@RequestMapping("/event.gu")
 		public String event() {
 			logger.info("이벤트 게시판으로 이동합니다.");
 			
-			return "/guest/event";
+			return "/all/event";
 		}
-		
-		@RequestMapping("/eventProgress.gu") 
-		public String eventProgress() {
-			logger.info("진행중인 이벤트 게시판으로 이동합니다.");
-			
-			return "/guest/eventProgress";
-		}
-		
-		@RequestMapping("/eventEnd.gu") 
-		public String eventEnd() {
-			logger.info("완료된 이벤트 게시판으로 이동합니다.");
-			
-			return "/guest/eventEnd";
-		}
-		
-		@RequestMapping("/winner.gu") 
-		public String winner() {
-			logger.info("당첨자 게시판으로 이동합니다.");
-			
-			return "/guest/winner";
-		}
-		//---------------------------------------------
 		
 		@RequestMapping("/reviews.gu")
 		public String reviews() {
@@ -252,44 +212,58 @@ public class GuestController {
 			return "all/company";
 		}
 		
-		//------------------------------------2020/02/18 주식 페이지 추가------------------------------------
-		/*상품 접속(주식 목록)*/
-	    @RequestMapping("/stockList.gu")
-	    public String stockList() {
-	       logger.info("주식상품 목록으로 이동합니다.");
-	         
-	       return "/all/stockList";
-	    }
-	      
-	    /*상품 상세페이지*/
-	    @RequestMapping("/stockDetail.gu")
-	    public String stockDetail() {
-	       logger.info("주식 상세페이지로 이동합니다.");
-	         
-	       return "/all/stockDetail";
-	    }
-	      
-	    /*투자하기 페이지*/
-	    @RequestMapping("/buyStock.gu")
-	    public String buyStock() {
-	       logger.info("주식 투자페이지로 이동합니다.");
-	         
-	       return "/all/buyStock";
-	    }
-	      
-	    /*결제상세 페이지*/
-	    @RequestMapping("/buyStockDetail.gu")
-	    public String buyStockDetail() {
-	       logger.info("주식 구매 상세페이지로 이동합니다,");
-	         
-	       return "/all/buyStockDetail";
-	    }
-	      
-	    /*구매처리 페이지*/
-	    @RequestMapping("/buyStockPro.gu")
-	    public String buyStockPro() {
-	       logger.info("주식구매처리 페이지");
-	        
-	       return "/all/buyStockPro";
-	    }
+		//--------------------17022020 오소라, 허성민 펀드 추가 시작---------------------------//
+		
+		/*상품 접속*/
+		@RequestMapping("/fundList.gu")
+		public String fundList() {
+			logger.info("펀드상품 목록으로 이동합니다.");
+			
+			//
+			
+			return "/all/fundList";
+		}
+		
+		/*상품 상세페이지*/
+		@RequestMapping("/fundDetail.gu")
+		public String fundDetail() {
+			logger.info("펀드 상세페이지로 이동합니다.");
+			
+			return "/all/fundDetail";
+		}
+		
+		/*투자하기 페이지*/
+		@RequestMapping("/buyFund.gu")
+		public String buyFund() {
+			logger.info("펀드 투자페이지로 이동합니다.");
+			
+			return "/all/buyFund";
+		}
+		
+		/*결제상세 페이지*/
+		@RequestMapping("/buyFundDetail.gu")
+		public String buyFundDetail() {
+			logger.info("펀드 구매 상세페이지로 이동합니다,");
+			
+			return "/all/buyFundDetail";
+		}
+		
+		/*구매처리 페이지*/
+		@RequestMapping("/buyFundPro.gu")
+		public String buyFundPro() {
+			logger.info("펀드구매처리 페이지");
+			
+			return "/all/buyFundPro";
+		}
+		
+		//--------------------17022020 오소라, 허성민 펀드 추가 완료---------------------------//
+		
+		/*계모임 목록*/
+		@RequestMapping("/gatheringList.gu")
+		public String gatheringList() {
+			logger.info("계모임 목록으로 이동합니다.");
+			
+			return "/all/gatheringList";
+		}
+		
 }
