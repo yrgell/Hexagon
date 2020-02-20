@@ -36,7 +36,13 @@ public class GuestController {
 		logger.info("/join.gu");
 		return "sign/join";
 	}
-
+	//아이디 중복확인
+	@RequestMapping("/confirmId.gu")
+	public String idcheck(HttpServletRequest req, Model model) {
+		logger.info("아이디 중복확인으로 이동합니다.");
+		gservice.idcheck(req, model);
+		return "sign/confirmId";
+	}	
 	//회원가입
 	@RequestMapping("/joinPro.gu")
 	public String joinPro(HttpServletRequest req, Model model) {
@@ -44,6 +50,21 @@ public class GuestController {
 		gservice.joinPro(req, model);
 		return "sign/login";
 	}
+	//회원가입 추가 정보입력
+	@RequestMapping("/joinPro.gu")
+	public String joinPro(HttpServletRequest req, Model model) {
+		logger.info("/joinPro.gu");
+		gservice.joinPro2(req, model);
+		return "sign/joinPro";
+	}
+	//이메일 인증
+	@RequestMapping("/emailChk.gu")
+	public String emailChk(HttpServletRequest req, Model model) {
+		logger.info("/joinPro.gu");
+		gservice.emailChk(req, model);
+		return "sign/login";
+	}
+
 	//로그인
 		@RequestMapping("/login.gu")
 		public String login(HttpServletRequest req, Model model) {
@@ -104,14 +125,35 @@ public class GuestController {
 			
 			return "/all/howtoGath";
 		}
-		
+		//-------------20.2.18 현진 작업중(AJAX)-------------
+		//-------------------이벤트 게시판-------------------
 		@RequestMapping("/event.gu")
 		public String event() {
 			logger.info("이벤트 게시판으로 이동합니다.");
 			
 			return "/all/event";
 		}
+		@RequestMapping("/eventProgress.gu") 
+		public String eventProgress() {
+			logger.info("진행중인 이벤트 게시판으로 이동합니다.");
+			
+			return "/guest/eventProgress";
+		}
 		
+		@RequestMapping("/eventEnd.gu") 
+		public String eventEnd() {
+			logger.info("완료된 이벤트 게시판으로 이동합니다.");
+			
+			return "/guest/eventEnd";
+		}
+		
+		@RequestMapping("/winner.gu") 
+		public String winner() {
+			logger.info("당첨자 게시판으로 이동합니다.");
+			
+			return "/guest/winner";
+		}
+		//---------------------------------------------
 		@RequestMapping("/reviews.gu")
 		public String reviews() {
 			logger.info("후기 게시판으로 이동합니다.");
@@ -257,7 +299,46 @@ public class GuestController {
 		}
 		
 		//--------------------17022020 오소라, 허성민 펀드 추가 완료---------------------------//
-		
+		//------------------------------------2020/02/18 주식 페이지 추가------------------------------------
+		/*상품 접속(주식 목록)*/
+	    @RequestMapping("/stockList.gu")
+	    public String stockList() {
+	       logger.info("주식상품 목록으로 이동합니다.");
+	         
+	       return "/all/stockList";
+	    }
+	      
+	    /*상품 상세페이지*/
+	    @RequestMapping("/stockDetail.gu")
+	    public String stockDetail() {
+	       logger.info("주식 상세페이지로 이동합니다.");
+	         
+	       return "/all/stockDetail";
+	    }
+	      
+	    /*투자하기 페이지*/
+	    @RequestMapping("/buyStock.gu")
+	    public String buyStock() {
+	       logger.info("주식 투자페이지로 이동합니다.");
+	         
+	       return "/all/buyStock";
+	    }
+	      
+	    /*결제상세 페이지*/
+	    @RequestMapping("/buyStockDetail.gu")
+	    public String buyStockDetail() {
+	       logger.info("주식 구매 상세페이지로 이동합니다,");
+	         
+	       return "/all/buyStockDetail";
+	    }
+	      
+	    /*구매처리 페이지*/
+	    @RequestMapping("/buyStockPro.gu")
+	    public String buyStockPro() {
+	       logger.info("주식구매처리 페이지");
+	        
+	       return "/all/buyStockPro";
+	    }
 		/*계모임 목록*/
 		@RequestMapping("/gatheringList.gu")
 		public String gatheringList() {

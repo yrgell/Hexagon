@@ -5,24 +5,50 @@ import java.sql.Timestamp;
 public class MemberVO {
 	private	String guestid  ;
 	private	String emailchk  ;
-	private String  name  ;
-	private  String pass  ;
-	private  int financechk  ;
-	private  int enabled  ;
-	private String  authority  ;
+	private	String emailcode  ;
+	private String name  ;
+	private String pass  ;
+	private String credit_chk  ;
+	private String enabled  ;
+	private String authority  ;
+	private String address  ;
+	private String mobile  ;
+	private String favor ;
+	private String job  ;
 	private  Timestamp join_date ;
-	private String  address  ;
-	private  String mobile  ;
-	private  String favor ;
-	private  String guestid2  ;
-	private  String job  ;
 	private  int work_year  ;
-	private int  married  ;
-	private int  house  ;
-	private int  car  ;
-	private String  typehouse ;
-	private String  dob  ;
-	private String  sex ;
+	private String married  ;
+	private String house  ;
+	private String car  ;
+	private String typehouse ;
+	private String authorization_code ;
+	private String profile_img ;
+	
+	
+	public String getEmailcode() {
+		return emailcode;
+	}
+	public void setEmailcode(String emailcode) {
+		this.emailcode = emailcode;
+	}
+	public String getCredit_chk() {
+		return credit_chk;
+	}
+	public void setCredit_chk(String credit_chk) {
+		this.credit_chk = credit_chk;
+	}
+	public String getAuthorization_code() {
+		return authorization_code;
+	}
+	public void setAuthorization_code(String authorization_code) {
+		this.authorization_code = authorization_code;
+	}
+	public String getProfile_img() {
+		return profile_img;
+	}
+	public void setProfile_img(String profile_img) {
+		this.profile_img = profile_img;
+	}
 	public String getGuestid() {
 		return guestid;
 	}
@@ -47,16 +73,11 @@ public class MemberVO {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-	public int getFinancechk() {
-		return financechk;
-	}
-	public void setFinancechk(int financechk) {
-		this.financechk = financechk;
-	}
-	public int getEnabled() {
+	
+	public String getEnabled() {
 		return enabled;
 	}
-	public void setEnabled(int enabled) {
+	public void setEnabled(String enabled) {
 		this.enabled = enabled;
 	}
 	public String getAuthority() {
@@ -89,12 +110,7 @@ public class MemberVO {
 	public void setFavor(String favor) {
 		this.favor = favor;
 	}
-	public String getGuestid2() {
-		return guestid2;
-	}
-	public void setGuestid2(String guestid2) {
-		this.guestid2 = guestid2;
-	}
+	
 	public String getJob() {
 		return job;
 	}
@@ -107,22 +123,22 @@ public class MemberVO {
 	public void setWork_year(int work_year) {
 		this.work_year = work_year;
 	}
-	public int getMarried() {
+	public String getMarried() {
 		return married;
 	}
-	public void setMarried(int married) {
+	public void setMarried(String married) {
 		this.married = married;
 	}
-	public int getHouse() {
+	public String getHouse() {
 		return house;
 	}
-	public void setHouse(int house) {
+	public void setHouse(String house) {
 		this.house = house;
 	}
-	public int getCar() {
+	public String getCar() {
 		return car;
 	}
-	public void setCar(int car) {
+	public void setCar(String car) {
 		this.car = car;
 	}
 	public String getTypehouse() {
@@ -131,18 +147,7 @@ public class MemberVO {
 	public void setTypehouse(String typehouse) {
 		this.typehouse = typehouse;
 	}
-	public String getDob() {
-		return dob;
-	}
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
-	public String getSex() {
-		return sex;
-	}
-	public void setSex(String sex) {
-		this.sex = sex;
-	} 
+	
 	
 	
 }
