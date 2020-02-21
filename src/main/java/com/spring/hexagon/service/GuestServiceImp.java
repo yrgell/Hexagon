@@ -38,7 +38,7 @@ public class GuestServiceImp implements GuestService{
 		String pw2=passwordEncoder.encode(pw);
 		System.out.println(pw2);
 		
-		vo.setGuestid(id);
+		vo.setGuestId(id);
 		vo.setPass(pw2);
 		
 		

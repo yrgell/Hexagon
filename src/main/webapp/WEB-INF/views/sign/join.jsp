@@ -4,13 +4,14 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
-<meta name="viewport" content="width=device-width ,initial-scale=1">
+	<title>Sign In</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <%@ include file = "../include/header.jsp" %>
-   <!--contents--> 
+<!-- #header -->
+	  <!--contents--> 
 	<div class="limiter p-t-90">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -20,11 +21,11 @@
 					</span>
 				</div>
 
-				<form class="login100-form validate-form" action = "${path}joinNext.gu">
+				<form class="login100-form validate-form">
 					<div class="wrap-input100 validate-input-btn m-b-26" data-validate="UserName(email) is required">
 						<span class="label-input100">아이디(EMAIL)</span>
-						<input class="input100" type="text" name="email" placeholder="Email">
-						<input class="login300-form-btn" type="button" value="중복확인" onclick = "window.location='${path}idconfirmChk.gu'">
+						<input class="input100" type="text" name="guestid" placeholder="Email">
+						<input class="login300-form-btn" type="button" value="중복확인"/>
 					</div>
 				
 					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
@@ -83,13 +84,18 @@
 						<button class="login100-form-btn">
 							이전
 						</button>
-						<input type = "submit" class="login200-form-btn" value = "회원가입">
+						<button class="login200-form-btn" onclick="location.href='joinPro.gu'">
+							회원 가입
+						</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 	<!--contents-->
+
+<!--footer-->
 <%@ include file = "../include/footer.jsp" %>
+<!--footer-->
 </body>
 </html>

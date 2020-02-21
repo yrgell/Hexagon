@@ -36,22 +36,7 @@ public class GuestController {
 		logger.info("/join.gu");
 		return "sign/join";
 	}
-	//아이디 중복확인
-	@RequestMapping("/idconfirmChk.gu")
-	public String idconfirmChk() {
-		logger.info("아이디 중복확인으로 이동합니다.");
-		
-		return "sign/idconfirmChk";
-	}
 
-	//회원동의 약관
-	@RequestMapping("/joinNext.gu")
-	public String joinNext() {
-		logger.info("회원가입 약관으로 이동합니다.");
-		
-		return "sign/joinNext";
-	}
-	
 	//회원가입
 	@RequestMapping("/joinPro.gu")
 	public String joinPro(HttpServletRequest req, Model model) {
@@ -65,6 +50,24 @@ public class GuestController {
 			logger.info("/login.gu");
 			return "sign/login";
 		}
+	
+//---------------------------2020/02/17 김진주 추가------------------------------
+	//아이디 중복확인
+	@RequestMapping("/idconfirmChk.gu")
+	public String idconfirmChk() {
+		logger.info("아이디 중복확인으로 이동합니다.");
+		
+		return "sign/idconfirmChk";
+	}
+	
+	//회원동의 약관
+	@RequestMapping("/joinNext.gu")
+	public String joinNext() {
+		logger.info("회원가입 약관으로 이동합니다.");
+		
+		return "sign/joinNext";
+	}
+
 	//아이디 찾기	
 		@RequestMapping("/findId.gu")
 		public String findId() {
@@ -79,28 +82,6 @@ public class GuestController {
 			
 			return "sign/findPass";
 		}	
-//		//로그인처리
-//		@RequestMapping("/loginPro.gu")
-//		public String loginPro(HttpServletRequest req, Model model) {
-//			logger.info("/loginPro.gu");
-//			return "sign/main";
-//		}
-		
-		/*상품 접속 관련*/
-		
-		@RequestMapping("/fundList.gu")
-		public String fundList() {
-			logger.info("펀드상품 목록으로 이동합니다.");
-			
-			return "/all/fundList";
-		}
-		
-		@RequestMapping("/gatheringList.gu")
-		public String gatheringList() {
-			logger.info("계모임 목록으로 이동합니다.");
-			
-			return "/all/gatheringList";
-		}
 		
 		/*게시판 접속 관련*/
 		
@@ -176,28 +157,79 @@ public class GuestController {
 		}
 		
 		@RequestMapping("/mygathering.me")
-		public String personalInfo() {
+		public String mygathering() {
 			logger.info("정보관리로 이동합니다.");
 			
 			return "/guest/personalInfo";
 		}
-		@RequestMapping("/personalInfo.me")
-		public String personalInfo() {
-			logger.info("정보관리로 이동합니다.");
+		
+		//------------------------------------2020/02/17 펀드,주식 추가-----------------------------------------------------
+		@RequestMapping("/fund.me")
+		public String fund() {
+			logger.info("펀드목록으로 이동합니다.");
 			
-			return "/guest/personalInfo";
+			return "all/fund";
 		}
-		@RequestMapping("/personalInfo.me")
-		public String personalInfo() {
-			logger.info("정보관리로 이동합니다.");
+		
+		@RequestMapping("/investing.me")
+		public String investing() {
+			logger.info("투자목록으로 이동합니다.");
 			
-			return "/guest/personalInfo";
+			return "all/invest";
 		}
-		@RequestMapping("/personalInfo.me")
-		public String personalInfo() {
-			logger.info("정보관리로 이동합니다.");
+		
+		@RequestMapping("/popup.gu")
+		public String popup() {
+			logger.info("상세페이지로 이동합니다.");
 			
-			return "/guest/personalInfo";
+			return "all/popup";
 		}
-	
+		
+		@RequestMapping("/recommend.me")
+		public String recommend() {
+			logger.info("맞춤추천으로 이동합니다.");
+			
+			return "all/recommend";
+		}
+		@RequestMapping("/snapshot.gu")
+		public String sanpshot() {
+			logger.info("분석 이동합니다.");
+			
+			return "all/snapshot";
+		}
+		
+		@RequestMapping("/graph.gu")
+		public String graph() {
+			logger.info("매매 이동합니다.");
+			
+			return "all/graph";
+		}
+		
+		@RequestMapping("/company.gu")
+		public String company() {
+			logger.info("회사 이동합니다.");
+			
+			return "all/company";
+		}
+		
+		//--------------------17022020 오소라, 허성민 펀드 추가 시작---------------------------//
+		
+		/*상품 접속*/
+		@RequestMapping("/fundList.gu")
+		public String fundList() {
+			logger.info("펀드상품 목록으로 이동합니다.");
+			
+			//
+			
+			return "/all/fundList";
+		}
+		
+		
+		//--------------------17022020 오소라, 허성민 펀드 추가 완료---------------------------//
+		@RequestMapping("/gatheringList.gu")
+		public String gatheringList() {
+			logger.info("계모임 목록으로 이동합니다.");
+			
+			return "/all/gatheringList";
+		}
 }

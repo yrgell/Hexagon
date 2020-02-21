@@ -5,7 +5,9 @@
 <body>
 <%@ include file = "../include/header.jsp" %>
   <!--contents-->
-  <img src = "${project}temp_img/이벤트.png">
+  <img src = "${project}images/event1.png">
+  <img src = "${project}images/event2.png">
+  <img src = "${project}images/event3.png">
   <!--contents-->
 <%@ include file = "../include/footer.jsp" %>
 </body>
