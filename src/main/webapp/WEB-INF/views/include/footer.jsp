@@ -97,15 +97,15 @@
                               <span>Social</span>
                              
                                <li>
-                                    <a href="#"><img src="/hexagon/resources/images/footerfacebook.png" alt="페이스북" width="36px"></a>
+                                    <a href="#"><img src="images/footerfacebook.png" alt="페이스북" width="36px"></a>
                                </li>
                               
                                <li>
-                                    <a href="#"><img class="m-t-3 m-l-5"src="/hexagon/resources/images/kakao_png.png" alt="카카오" width="32px"></a>
+                                    <a href="#"><img class="m-t-3 m-l-5"src="images/kakao_png.png" alt="카카오" width="32px"></a>
                                </li>
                                 
                                <li>
-                                    <a href="#"><img class="m-r-16" src="/hexagon/resources/images/instargram.png" alt="인스타그램" width="48px"></a>
+                                    <a href="#"><img class="m-r-16" src="images/instargram.png" alt="인스타그램" width="48px"></a>
                                </li>
                      </ul>
                </div>

@@ -10,7 +10,7 @@
 <!-- MyBatis 설정 시작 -->
 	<!-- 컨넥션 풀 -->
 	<bean name = "dataSource" class = "org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value = "java:comp/env/jdbc/Oracle11g_hexagon"/>
+		<property name="jndiName" value = "java:comp/env/jdbc/Oracle11g_hexagon_tbl"/>
 		<property name="resourceRef" value = "true" />
 	</bean>
 	

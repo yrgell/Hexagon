@@ -20,12 +20,7 @@
 						LogIn
 					</span>
 				</div>
-				<c:if test = "${errMsg != null}">
-					<script type="text/javascript">
-						alert("${errMsg}");
-					</script>
-				</c:if>
-				
+
 				<form class="login100-form validate-form" action='/hexagon/loginPro.gu'  method="post"> 
 				
 					<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}">

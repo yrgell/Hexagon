@@ -24,11 +24,31 @@ public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	@RequestMapping("/my.gu")
+	//마이페이지 접속하기
+	@RequestMapping("/my.me")
 	public String main(HttpServletRequest req, Model model) {
-		logger.info("/my.gu");
+		logger.info("/my.me");
 		return "member/my";
 	}
+	@RequestMapping("/mypage.me")
+	public String mypage() {
+		logger.info("마이페이지로 이동합니다.");
+		
+		return "/guest/mypage";
+	}
 	
+	@RequestMapping("/personalInfo.me")
+	public String personalInfo() {
+		logger.info("정보관리로 이동합니다.");
+		
+		return "/guest/personalInfo";
+	}
+	
+	@RequestMapping("/mygathering.me")
+	public String mygathering() {
+		logger.info("정보관리로 이동합니다.");
+		
+		return "/guest/personalInfo";
+	}
 	
 }

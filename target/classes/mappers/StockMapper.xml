@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	    
+	    
+    <mapper namespace="com.spring.hexagon.persistence.StockDAO">
+    	<!-- 주식 목록 가져오기 -->
+    	<select id="getstockList" resultType="com.spring.hexagon.vo.StockVO">
+    		SELECT * FROM stock_tbl
+    	</select>
+    	
+    	<!-- 주식 목록 갯수 가져오기 -->
+    	<select id="getstockCnt" resultType="int">
+    		SELECT COUNT(*) FROM stock_tbl
+    	</select>
+    	
+    	<!-- 주식 상세 정보 가져오기 -->
+    	<select id="getStockDetail" resultType = "com.spring.hexagon.vo.StockVO">
+    		select * from stock_tbl where stock_code = #{stock_code}
+    	</select>
+    	
+    	<!-- 재무재표 가져오기 -->
+    	<select id="getBookInfo" resultType = "com.spring.hexagon.vo.Book_infoVO">
+    		select * from book_info_tbl where book_info_no = #{stock_code}
+    	</select>
+    </mapper>
