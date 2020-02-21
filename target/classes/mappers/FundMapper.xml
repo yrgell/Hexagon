@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	    
+	    
+<mapper namespace="com.spring.hexagon.persistence.FundDAO">
+	<!-- 상품갯수 -->
+	<select id="getFundCnt" resultType="int">
+		SELECT count(*) FROM fund_item_tbl
+	</select>
+	
+	<!-- 상품목록 -->
+	<select id="fundList" resultType="com.spring.hexagon.vo.Fund_itemVO">
+		SELECT * 
+		FROM fund_item_tbl
+	</select>
+	
+	<!-- 상품상세페이지 -->
+	<select id="fundDetail" resultType="com.spring.hexagon.vo.Fund_detailVO">
+		SELECT i.*, d.*
+		  FROM fund_item_tbl i, fund_detail_tbl d
+		 WHERE i.fund_name = d.fund_name
+		   AND i.fund_item_no =#{fund_item_no}
+	</select>
+	
+	<!-- 투자하기 -->
+	<insert id="fundBuy" parameterType="java.util.Map">
+		INSERT INTO fund_buy_tbl(fund_buy_no, fund_name, guestid, fund_after_tax, fund_interest_rate)
+		VALUES(fund_buy_seq.nextval , #{fund_name}, #{guestid}, #{fund_after_tax}, #{fund_interest_rate})
+	</insert>
+	
+</mapper>
