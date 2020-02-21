@@ -21,7 +21,6 @@
           <li class="menu-has-children bigDrop"><a href="">상품조회</a>
             <ul class="smallDrop">
               <li><a href="${path}fundList.gu">펀드상품조회</a></li>
-              <li><a href="${path}stockList.gu">주식상품조회</a></li>
               <li><a href="${path}gatheringList.gu">계모임상품조회</a></li>
             </ul>
           </li>
