@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	    
+	    
+<mapper namespace="com.spring.hexagon.persistence.FundDAO">
+	<!-- 상품갯수 -->
+	<select id="getFundCnt" resultType="int">
+		SELECT count(*) FROM fund_item_tbl
+	</select>
+	
+	<!-- 상품목록 -->
+	<select id="fundList" resultType="com.spring.hexagon.vo.Fund_itemVO">
+		SELECT * 
+		FROM fund_item_tbl
+	</select>
+	
+	<!-- 상품상세페이지 -->
+	<select id="fundDetail" resultType="com.spring.hexagon.vo.Fund_detailVO">
+		SELECT i.*, d.*
+		  FROM fund_item_tbl i, fund_detail_tbl d
+		 WHERE i.fund_name = d.fund_name
+		   AND i.fund_item_no =#{fund_item_no}
+	</select>
+	
+	<!-- 투자하기 -->
+	<insert id="fundBuy" parameterType="java.util.Map">
+		INSERT INTO fund_buy_tbl(fund_buy_no, fund_name, guestid, fund_after_tax, fund_interest_rate,fund_invest_money,fund_buy_state)
+		VALUES(fund_buy_seq.nextval , #{fund_name}, #{guestid}, #{fund_after_tax}, #{fund_interest_rate},#{fund_invest_money},#{fund_buy_state})
+	</insert>
+	
+	<!-- 펀드 구매 후 모집금액 누적 -->
+	<update id="addInvestedMoney" parameterType = "java.util.Map">
+		update fund_detail_tbl 
+		set fund_invested_money = fund_invested_money + #{fund_invest_money},
+			fund_investor_num = fund_investor_num + 1
+		where fund_name = #{fund_name}
+	</update>
+	
+	<!-- 맞춤투자 성향 insert -->
+	<insert id="fundcustomisePro" parameterType="java.util.Map">
+	INSERT INTO investment_info_tbl(inv_no,inv_risk_taking,inv_profit_taking,inv_purpose,inv_experience,inv_term)
+	VALUES (investment_info_seq.nextval,#{inv_risk_taking},#{inv_profit_taking},#{inv_purpose},#{inv_experience},#{inv_term}) 
+	</insert>
+	
+	<!-- 맞춤 투자 성향 guest_tbl update -->
+	<update id="updateInvInfo" parameterType="String">
+	update guest_tbl set inv_no = investment_info_seq.currval
+	where guestid = #{guestid} 
+	</update>
+	
+	<!-- 맞춤 펀드리스트 불러오기 -->
+	<select resultType="com.spring.hexagon.vo.Fund_itemVO" id="getCustFund">
+	select i.* from fund_item_tbl i, fund_detail_tbl d
+	where i.fund_name = d.fund_name
+	AND d.fund_type LIKE '%'||#{keyword}||'%' 
+	</select>
+	
+	<!-- 투자취소 -->
+	
+	<!-- 투자취소 후 모집금액, 투자자수 누적 -->
+	<update id="subInvestedMoney" parameterType = "java.util.Map">
+		update fund_detail_tbl 
+		set fund_invested_money =fund_invested_money - #{fund_invested_money},
+			fdvo.fund_investor_num - 1
+		where fund_name = #{fund_name}
+	</update>
+	
+	<!-- 투자완료된 금액, 목표금액 불러오기 -->
+	<select id="getInvestedMoney" resultType = "com.spring.hexagon.vo.Fund_detailVO">
+		select * from fund_detail_tbl where fund_name = #{fund_name}
+	</select>
+	
+	<!-- 투자 금액 초과시 펀드 상태 바꿔주기 -->
+	<update id="switchFundState" parameterType = "String">
+		update fund_item_tbl set fund_state ='모집완료' where fund_name = #{fund_name}
+	</update>
+</mapper>

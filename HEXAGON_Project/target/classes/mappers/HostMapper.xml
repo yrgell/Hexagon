@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.spring.hexagon.persistence.HostDAO">
+	<!-- 관리자 QnA 정보 -->
+	<select id="listAll" resultType="com.spring.hexagon.vo.HostVO">
+		SELECT qna_no, guestid, qna_type, qna_title, qna_content, qna_pass,
+		qna_date
+		From qna_tbl
+		<include refid="search"></include>
+		ORDER BY qna_no desc
+	</select>
+
+	<select id="countArticle" resultType="int">
+		SELECT COUNT(*) FROM qna_tbl
+		<include refid="search"></include>
+	</select>
+
+	<sql id="search">
+		<choose>
+			<!-- 검색옵션이 전체 검색일 경우 -->
+			<when test="searchOption == 'all'">
+				WHERE guestid like '%'||#{keyword}||'%'
+				OR qna_content like '%'||#{keyword}||'%'
+				OR qna_title like '%'||#{keyword}||'%'
+			</when>
+			<!-- 전체 검색이 아닐 경우 -->
+			<otherwise>
+				WHERE ${searchOption} like '%'||#{keyword}||'%'
+			</otherwise>
+		</choose>
+	</sql>
+
+	<select id="getArticleCnt" resultType="int">
+		SELECT COUNT(*) FROM qna_tbl
+	</select>
+
+	<select id="getArticleList"
+		resultType="com.spring.hexagon.vo.HostVO"
+		parameterType="com.spring.hexagon.vo.HostVO">
+		SELECT * FROM qna_tbl ORDER BY qna_no DESC
+	</select>
+
+	<!-- 관리자 공지사항 정보 -->
+	<select id="getNoticeCount" resultType="int">
+		SELECT COUNT(*) FROM notice_tbl
+	</select>
+
+	<select id="getNoticeList"
+		resultType="com.spring.hexagon.vo.HostVO"
+		parameterType="com.spring.hexagon.vo.HostVO">
+		SELECT * FROM notice_tbl ORDER BY nb_num DESC
+	</select>
+
+	<insert id="insertNotice"
+		parameterType="com.spring.hexagon.vo.HostVO">
+		INSERT INTO notice_tbl(nb_num, nb_title, nb_date, nb_state, nb_content,
+		nb_count, nb_type)
+		VALUES(notice_tbl_seq.nextval, #{nb_title}, sysdate, 1, #{nb_content}, 0, #{nb_type})
+	</insert>
+
+	<delete id="deleteNotice" parameterType="int">
+		DELETE FROM notice_tbl WHERE nb_num = #{nb_num}
+	</delete>
+
+	<select id="getNotice" resultType="com.spring.hexagon.vo.HostVO"
+		parameterType="com.spring.hexagon.vo.HostVO">
+		SELECT * FROM notice_tbl WHERE nb_num = #{nb_num}
+	</select>
+	<update id="updateNotice"
+		parameterType="com.spring.hexagon.vo.HostVO">
+		UPDATE notice_tbl SET nb_type=#{nb_type}, nb_title = #{nb_title},
+		nb_content=#{nb_content}
+		WHERE nb_num=#{nb_num}
+	</update>
+	<!-- //////////////////////////////////////////////////////////// -->
+
+	<select id="getQnA" resultType="com.spring.hexagon.vo.HostVO"
+		parameterType="com.spring.hexagon.vo.HostVO">
+		SELECT * FROM qna_tbl WHERE qna_no = #{qna_no}
+	</select>
+
+	<update id="updateQnA"
+		parameterType="com.spring.hexagon.vo.HostVO">
+		UPDATE qna_tbl SET qna_content=#{qna_content}
+		WHERE qna_no=#{qna_no}
+	</update>
+
+	<!-- //////////////////////////////// 펀드관리 //////////////////////////////////////// -->
+	
+	<!-- 펀드 목록 불러오기 -->
+	<select resultType="com.spring.hexagon.vo.Fund_itemVO" id="getFundList">
+		select * from fund_item_tbl order by fund_state, fund_name
+	</select>
+
+	<!-- 펀드 추가페이지 디테일 목록 -->
+	<select resultType="com.spring.hexagon.vo.Fund_detailVO" id="getFundDetailList">
+		select * from fund_detail_tbl where not fund_detail_state = ' 정상등록' ORDER BY fund_detail_state, fund_name
+	</select>
+
+	<!-- 펀드 추가 -->
+	<insert id="insertFund" parameterType="com.spring.hexagon.vo.Fund_itemVO">
+		insert into FUND_ITEM_TBL(fund_img,fund_state,fund_comission,fund_eximg,fund_name,fund_item_no)
+		values (#{fund_img},#{fund_state},#{fund_comission},#{fund_eximg},#{fund_name},fund_item_seq.nextval)
+	</insert>
+
+	<!-- 상품 한건 가져오기 -->
+	<select resultType="com.spring.hexagon.vo.Fund_itemVO" id="fundOne" parameterType="int">
+		select * from fund_item_tbl 
+		where fund_item_no = #{fund_item_no}
+	</select>
+
+	<!-- 펀드 업데이트 -->
+	<update id="fundUpdate" parameterType="com.spring.hexagon.vo.Fund_itemVO">
+		update fund_item_tbl 
+		set 
+		fund_img=#{fund_img},
+		fund_eximg=#{fund_eximg}, 
+		fund_state=#{fund_state},
+		fund_comission=#{fund_comission}
+		where fund_item_no = #{fund_item_no}
+	</update>
+	
+	<!-- 펀드 삭제 -->
+	<delete id="fundDelete" parameterType = "String">
+		delete fund_item_tbl where fund_name = #{fund_name}
+	</delete>
+	
+	<!-- 펀드 디테일 상태업데이트 -->
+	<update id="updateDetailState" parameterType = "java.util.Map">
+		update fund_detail_tbl set fund_detail_state=#{fund_detail_state}
+		where fund_name = #{fund_name}
+	</update>
+</mapper>

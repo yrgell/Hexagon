@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	    
+	    
+<mapper namespace="com.spring.hexagon.persistence.MemberDAO">
+	
+	<!-- 개인 정보 확인하기 -->
+	<select id="memberInfo" resultType="int">
+	SELECT * FROM GUEST_TBL WHERE GUESTID=#{guestid}
+	</select>
+	
+	<!-- 개인 정보 수정하기 전 비밀번호 확인 -->
+	<select id="pwdCheck" resultType="int">
+	SELECT COUNT(*) FROM GUEST_TBL WHERE GUESTID=#{guestid} AND PASS= #{pwd} 
+	</select>
+	
+	<!-- 개인 정보 수정처리 -->
+	<update id="modifyMemberInfo" parameterType="com.spring.hexagon.vo.MemberVO">
+	UPDATE GUEST_TBL
+	SET
+		NAME=#{name},
+		PASS=#{pass},
+		ADDRESS=#{address},
+		MOBILE=#{mobile},
+		FAVOR=#{favor},
+		JOB=#{job},
+		WORK_YEAR=#{work_year},
+		MARRIED=#{married},
+		HOUSE=#{house},
+		CAR=#{car},
+		TYPEHOUSE=#{typehouse},
+		DOB=#{dob},
+		CHILD=#{child},
+		SEX=#{sex},
+		PROFILE_IMG=#{profile_img},
+		ACCOUNT_NUM=#{account_num}
+	WHERE GUESTID=#{guestid}
+	</update>
+	
+	<!-- 계 갯수  -->
+	<select id="gatherCnt" resultType="int">
+	SELECT COUNT(*) FROM GATH_BUY_TBL WHERE GUESTID=#{guestid}
+	</select>
+	
+	<!-- 개인 계 내역-->
+	<select id="myGatherList" parameterType="java.util.Map" resultType="com.spring.hexagon.vo.Gath_buyVO">
+	<![CDATA[
+		SELECT * FROM (select GATH_BUY_NO,GUESTID,GATH_NUM,GATH_REG_DATE,GATH_BUY_DATE
+						,GATH_DUE_DATE,GATH_BUY_STATE,GATH_ACTUAL_RATE,GATH_TURN,GATH_PAYBACK_DATE,GATH_PAY_MONTH,rownum num 
+						FROM(
+						select * from GATH_BUY_TBL 
+						order by GATH_BUY_DATE desc
+						        ) 						
+							   )
+					WHERE num >= #{start} 				
+					AND num <= #{end}
+					AND GUESTID=#{guestid}
+		]]>
+	</select>
+	
+	<!-- 펀드 갯수 -->
+	<select id="fundCnt" parameterType="String" resultType="int">
+	SELECT COUNT(*) FROM FUND_BUY_TBL WHERE GUESTID=#{guestid}
+	</select>
+		
+	<!-- 개인 구매내역(펀드) -->
+	<select id="myFundList" parameterType="java.util.Map" resultType="com.spring.hexagon.vo.Fund_buyVO">
+	<![CDATA[
+		SELECT * FROM (select BUY_CODE,BUY_CNT,BUY_PRICE,BUY_TOTAL,BUY_DATE,BUY_STATE,STOCK_CODE,rownum num 
+						FROM(
+						select * from FUND_BUY_TBL 
+						order by FUND_BUY_DATE desc
+						        ) 						
+							   )
+					WHERE num >= #{start} 				
+					AND num <= #{end}
+					AND GUESTID=#{guestid}
+		]]>
+	</select>
+	
+	<!-- 주식 갯수 -->
+	<select id="stockCnt" resultType="int">
+	SELECT COUNT(*) FROM STOCK_BUY WHERE GUESTID=#{guestid}
+	</select>
+	
+	<!-- 개인 구매내역(주식) -->
+	<select id="myStockList" parameterType="String" resultType="com.spring.hexagon.vo.StockVO">
+	SELECT * FROM STOCK_BUY WHERE GUESTID=#{guestid} ORDER BY BUY_DATE DESC
+	</select>
+	
+</mapper>
